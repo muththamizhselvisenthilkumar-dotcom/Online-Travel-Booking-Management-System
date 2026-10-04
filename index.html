@@ -1,0 +1,968 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>TravelGo - Online Travel Booking</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+
+<!-- ================= LOGIN ================= -->
+
+<div id="loginPage" class="login-page">
+
+    <div class="login-card">
+
+        <div class="logo">
+            ✈️
+        </div>
+
+        <h1>TravelGo</h1>
+
+        <p>Online Travel Booking & Management</p>
+
+        <form id="loginForm">
+
+            <label>User ID</label>
+
+            <input
+                type="text"
+                id="userId"
+                placeholder="Enter User ID"
+                required
+            >
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter Password"
+                required
+            >
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+        <div class="demo">
+            Demo Login:
+            <b>TRAVEL001</b> /
+            <b>1234</b>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= MAIN APP ================= -->
+
+<div id="app" class="app hidden">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                ✈️
+            </div>
+
+            <div>
+                <h2>TravelGo</h2>
+                <small>Travel Management</small>
+            </div>
+
+        </div>
+
+
+        <nav>
+
+            <button
+                class="nav-btn active"
+                onclick="showPage('home',this)">
+
+                🏠 Dashboard
+
+            </button>
+
+
+            <button
+                class="nav-btn"
+                onclick="showPage('destinations',this)">
+
+                🌍 Destinations
+
+            </button>
+
+
+            <button
+                class="nav-btn"
+                onclick="showPage('flights',this)">
+
+                ✈️ Flights
+
+            </button>
+
+
+            <button
+                class="nav-btn"
+                onclick="showPage('hotels',this)">
+
+                🏨 Hotels
+
+            </button>
+
+
+            <button
+                class="nav-btn"
+                onclick="showPage('bookings',this)">
+
+                📋 My Bookings
+
+            </button>
+
+
+            <button
+                class="nav-btn"
+                onclick="showPage('profile',this)">
+
+                👤 Profile
+
+            </button>
+
+        </nav>
+
+
+        <button
+            class="logout"
+            onclick="logout()">
+
+            🚪 Logout
+
+        </button>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h2 id="pageTitle">
+                    Dashboard
+                </h2>
+
+                <p id="currentDate"></p>
+
+            </div>
+
+
+            <div class="top-user">
+
+                <div class="notification">
+
+                    🔔
+
+                    <span id="bookingCount">
+                        0
+                    </span>
+
+                </div>
+
+
+                <div class="avatar">
+                    TS
+                </div>
+
+
+                <div>
+
+                    <b>
+                        Travel User
+                    </b>
+
+                    <small>
+                        Premium Member
+                    </small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section
+            id="home"
+            class="page active-page">
+
+
+            <div class="hero">
+
+                <div>
+
+                    <span>
+                        EXPLORE • TRAVEL • EXPERIENCE
+                    </span>
+
+                    <h1>
+                        Discover Your Next Adventure
+                    </h1>
+
+                    <p>
+                        Search destinations, book flights,
+                        reserve hotels and manage all your
+                        travel plans in one place.
+                    </p>
+
+                    <button
+                        onclick="showPage('destinations')">
+
+                        Explore Destinations →
+
+                    </button>
+
+                </div>
+
+                <div class="hero-icon">
+                    🌎
+                </div>
+
+            </div>
+
+
+            <!-- STATS -->
+
+            <div class="stats">
+
+
+                <div class="stat">
+
+                    <div class="stat-icon">
+                        🌍
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Destinations
+                        </span>
+
+                        <h2>
+                            50+
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-icon">
+                        ✈️
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Available Flights
+                        </span>
+
+                        <h2>
+                            120+
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-icon">
+                        🏨
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Hotels
+                        </span>
+
+                        <h2>
+                            300+
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-icon">
+                        📋
+                    </div>
+
+                    <div>
+
+                        <span>
+                            My Bookings
+                        </span>
+
+                        <h2 id="dashboardBookings">
+                            0
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- POPULAR DESTINATIONS -->
+
+            <div class="section-title">
+
+                <div>
+
+                    <h2>
+                        Popular Destinations
+                    </h2>
+
+                    <p>
+                        Top destinations chosen by travellers
+                    </p>
+
+                </div>
+
+                <button
+                    class="view-btn"
+                    onclick="showPage('destinations')">
+
+                    View All
+
+                </button>
+
+            </div>
+
+
+            <div
+                class="destination-grid"
+                id="popularDestinations">
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= DESTINATIONS ================= -->
+
+        <section
+            id="destinations"
+            class="page">
+
+            <div class="section-title">
+
+                <div>
+
+                    <h1>
+                        Explore Destinations
+                    </h1>
+
+                    <p>
+                        Find your perfect travel destination.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="filters">
+
+                <input
+                    type="text"
+                    id="destinationSearch"
+                    placeholder="🔍 Search destination..."
+                    oninput="filterDestinations()"
+                >
+
+
+                <select
+                    id="destinationType"
+                    onchange="filterDestinations()">
+
+                    <option value="All">
+                        All Categories
+                    </option>
+
+                    <option value="Beach">
+                        Beach
+                    </option>
+
+                    <option value="Mountain">
+                        Mountain
+                    </option>
+
+                    <option value="City">
+                        City
+                    </option>
+
+                    <option value="Heritage">
+                        Heritage
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div
+                class="destination-grid"
+                id="destinationList">
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FLIGHTS ================= -->
+
+        <section
+            id="flights"
+            class="page">
+
+            <div class="section-title">
+
+                <div>
+
+                    <h1>
+                        Flight Booking
+                    </h1>
+
+                    <p>
+                        Search and book your flights.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="search-box">
+
+                <div>
+
+                    <label>
+                        From
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fromCity"
+                        placeholder="Chennai"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        To
+                    </label>
+
+                    <input
+                        type="text"
+                        id="toCity"
+                        placeholder="Delhi"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Travel Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="flightDate"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Passengers
+                    </label>
+
+                    <input
+                        type="number"
+                        id="passengers"
+                        min="1"
+                        max="9"
+                        value="1"
+                    >
+
+                </div>
+
+
+                <button
+                    onclick="searchFlights()">
+
+                    Search Flights
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="flightResults"
+                class="flight-list">
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= HOTELS ================= -->
+
+        <section
+            id="hotels"
+            class="page">
+
+            <div class="section-title">
+
+                <div>
+
+                    <h1>
+                        Hotel Booking
+                    </h1>
+
+                    <p>
+                        Find comfortable stays for your trip.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="hotel-grid">
+
+                <div class="hotel-card">
+
+                    <div class="hotel-image">
+                        🏨
+                    </div>
+
+                    <div class="hotel-content">
+
+                        <h3>
+                            Grand Chennai Hotel
+                        </h3>
+
+                        <p>
+                            📍 Chennai
+                        </p>
+
+                        <div class="rating">
+                            ⭐ 4.7
+                        </div>
+
+                        <h2>
+                            ₹3,500
+                            <small>/ night</small>
+                        </h2>
+
+                        <button
+                            onclick="bookHotel(
+                                'Grand Chennai Hotel',
+                                3500
+                            )">
+
+                            Book Hotel
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hotel-card">
+
+                    <div class="hotel-image">
+                        🏨
+                    </div>
+
+                    <div class="hotel-content">
+
+                        <h3>
+                            Marina Bay Resort
+                        </h3>
+
+                        <p>
+                            📍 Goa
+                        </p>
+
+                        <div class="rating">
+                            ⭐ 4.9
+                        </div>
+
+                        <h2>
+                            ₹5,200
+                            <small>/ night</small>
+                        </h2>
+
+                        <button
+                            onclick="bookHotel(
+                                'Marina Bay Resort',
+                                5200
+                            )">
+
+                            Book Hotel
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hotel-card">
+
+                    <div class="hotel-image">
+                        🏨
+                    </div>
+
+                    <div class="hotel-content">
+
+                        <h3>
+                            Himalayan View Hotel
+                        </h3>
+
+                        <p>
+                            📍 Manali
+                        </p>
+
+                        <div class="rating">
+                            ⭐ 4.8
+                        </div>
+
+                        <h2>
+                            ₹4,200
+                            <small>/ night</small>
+                        </h2>
+
+                        <button
+                            onclick="bookHotel(
+                                'Himalayan View Hotel',
+                                4200
+                            )">
+
+                            Book Hotel
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= BOOKINGS ================= -->
+
+        <section
+            id="bookings"
+            class="page">
+
+            <div class="section-title">
+
+                <div>
+
+                    <h1>
+                        My Bookings
+                    </h1>
+
+                    <p>
+                        Manage your travel reservations.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="bookingList"
+                class="booking-list">
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PROFILE ================= -->
+
+        <section
+            id="profile"
+            class="page">
+
+            <div class="profile-card">
+
+                <div class="profile-top">
+
+                    <div class="profile-avatar">
+                        TS
+                    </div>
+
+                    <div>
+
+                        <h1>
+                            Travel User
+                        </h1>
+
+                        <p>
+                            Premium Traveller
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="profile-grid">
+
+                    <div class="profile-item">
+
+                        <span>
+                            User ID
+                        </span>
+
+                        <b>
+                            TRAVEL001
+                        </b>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <span>
+                            Email
+                        </span>
+
+                        <b>
+                            traveler@example.com
+                        </b>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <span>
+                            Phone
+                        </span>
+
+                        <b>
+                            +91 98765 43210
+                        </b>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <span>
+                            Membership
+                        </span>
+
+                        <b>
+                            Premium
+                        </b>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <span>
+                            Total Bookings
+                        </span>
+
+                        <b id="profileBookings">
+                            0
+                        </b>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <span>
+                            Account Status
+                        </span>
+
+                        <b class="verified">
+                            ✓ Verified
+                        </b>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================= BOOKING MODAL ================= -->
+
+<div
+    id="bookingModal"
+    class="modal hidden">
+
+    <div class="modal-card">
+
+        <button
+            class="close"
+            onclick="closeModal()">
+
+            ×
+
+        </button>
+
+
+        <div
+            id="modalIcon"
+            class="modal-icon">
+
+            🌍
+
+        </div>
+
+
+        <h2 id="modalTitle">
+            Book Trip
+        </h2>
+
+
+        <p id="modalDescription">
+            Complete your booking details.
+        </p>
+
+
+        <form id="bookingForm">
+
+            <label>
+                Travel Date
+            </label>
+
+            <input
+                type="date"
+                id="bookingDate"
+                required
+            >
+
+
+            <label>
+                Number of Travellers
+            </label>
+
+            <input
+                type="number"
+                id="travellerCount"
+                min="1"
+                max="10"
+                value="1"
+                required
+            >
+
+
+            <div class="total-box">
+
+                <span>
+                    Total Price
+                </span>
+
+                <b id="modalPrice">
+                    ₹0
+                </b>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="confirm-btn">
+
+                Confirm Booking
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    id="toast"
+    class="toast">
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
+```
